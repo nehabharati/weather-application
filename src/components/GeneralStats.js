@@ -11,8 +11,6 @@ import "chart.js";
 import { setLoadingStatus } from "../utils/getDailyInfo";
 import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
-// import Canvas from "./Canvas";
-
 const override = css`
   display: block;
   margin: 0 auto;
@@ -95,7 +93,6 @@ function GeneralStats(props) {
                 },
               }}
             />
-            {/* <Canvas/> */}
           </div>
         </>
       )}
