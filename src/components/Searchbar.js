@@ -16,35 +16,6 @@ function Searchbar(props) {
   const [image, setImage] = useState("/static/media/rain.d8fdecc0.svg");
   const [desciption, setDescription] = useState("Rain");
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      //   fetch(
-      //     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-      //       position.coords.latitude +
-      //       "&lon=" +
-      //       position.coords.longitude +
-      //       "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
-      //   )
-      //     .then((res) => res.json())
-      //     .then((res) => {
-      //       setTemp(Math.floor(res.current.temp));
-      //       if (res.current.weather[0].main === "Rain") {
-      //         setImage(Rain);
-      //       } else if (
-      //         res.current.weather[0].main === "Sunny" ||
-      //         res.current.weather[0].main === "Clear"
-      //       ) {
-      //         setImage(Sun);
-      //       } else {
-      //         setImage(Cloud);
-      //       }
-      //       setDescription(res.current.weather[0].main);
-      //     });
-      //   console.log("Latitude is :", position.coords.latitude);
-      //   console.log("Longitude is :", position.coords.longitude);
-    });
-  }, []);
-
   const fuse = new Fuse(cities, {
     keys: ["name"],
     includeScore: true,
