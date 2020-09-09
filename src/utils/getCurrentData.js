@@ -134,7 +134,7 @@ export function getIndividualTimes(city) {
             let temps = dailyTemps.concat(
               res.hourly.map((temp) => Math.floor(temp.temp))
             );
-            let arr1, arr2, temp1, temp2, temp3;
+            let arr1, arr2, temp1, temp2;
             let i = 0;
             let obj1, obj2, obj3;
 

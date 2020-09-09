@@ -23,7 +23,6 @@ function GeneralStats(props) {
   const [sunrise, setSunrise] = useState([]);
   const [sunset, setSunset] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     setLoadingStatus(props.item.city).then((res) => setLoading(res));

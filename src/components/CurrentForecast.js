@@ -29,7 +29,6 @@ function CurrentForecast(props) {
   const [hourlyTemp, setHourlyTemp] = useState([]);
   const [loading, setLoading] = useState(true);
   const [individualDay, setIndividualDay] = useState([]);
-  const [time, setTime] = useState([]);
 
   useEffect(() => {
     setLoadingStatus(props.item.city).then((res) => setLoading(res));
@@ -61,9 +60,9 @@ function CurrentForecast(props) {
         c.push(b[i][j]);
       }
     }
-    for (var i = 0; i < newTemp.length; i++) {
-      for (var j = 0; j < newTemp[i].length; j++) {
-        d.push(newTemp[i][j]);
+    for (var k = 0; k < newTemp.length; k++) {
+      for (var l = 0; l < newTemp[k].length; l++) {
+        d.push(newTemp[k][l]);
       }
     }
 

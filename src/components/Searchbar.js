@@ -8,9 +8,6 @@ import {
   getCurrentDescription,
   getCurrentTemp,
 } from "../utils/getCurrentData";
-import Sun from "../images/sun.svg";
-import Rain from "../images/rain.svg";
-import Cloud from "../images/cloud.svg";
 
 function Searchbar(props) {
   const [query, setQuery] = useState("");
