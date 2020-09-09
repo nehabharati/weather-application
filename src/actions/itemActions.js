@@ -1,4 +1,4 @@
-import { GET_ITEM, GET_HOURLY_DATA, SET_LOADING } from "./types";
+import { GET_ITEM, GET_HOURLY_DATA, SET_LOADING, SET_CLICKED } from "./types";
 
 export const getItems = (items) => {
   return {
@@ -17,5 +17,11 @@ export const getHourlyData = (items) => {
 export const setLoading = () => {
   return {
     type: SET_LOADING,
+  };
+};
+
+export const isClicked = () => {
+  return {
+    type: SET_CLICKED,
   };
 };

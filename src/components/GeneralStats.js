@@ -11,6 +11,7 @@ import "chart.js";
 import { setLoadingStatus } from "../utils/getDailyInfo";
 import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
+import Canvas from "./Canvas";
 
 const override = css`
   display: block;
@@ -24,6 +25,7 @@ function GeneralStats(props) {
   const [sunrise, setSunrise] = useState([]);
   const [sunset, setSunset] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     setLoadingStatus(props.item.city).then((res) => setLoading(res));
@@ -61,6 +63,7 @@ function GeneralStats(props) {
           loading={loading}
         />
       </div>
+
       {!loading && (
         <>
           <div className="stats">
@@ -92,6 +95,7 @@ function GeneralStats(props) {
                 },
               }}
             />
+            {/* <Canvas/> */}
           </div>
         </>
       )}

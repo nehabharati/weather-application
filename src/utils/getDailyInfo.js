@@ -6,16 +6,12 @@ import Cloud from "../images/cloud.svg";
 export function getDailyInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -72,16 +68,12 @@ export function getDailyInfo(city) {
 export function setLoadingStatus(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {

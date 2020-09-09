@@ -2,20 +2,17 @@ import moment from "moment";
 import Sun from "../images/sun.svg";
 import Rain from "../images/rain.svg";
 import Cloud from "../images/cloud.svg";
+import { useFetch } from "../hooks/cache";
 
 export function getCurrentTemp(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -28,16 +25,12 @@ export function getCurrentTemp(city) {
 export function getCurrentImage(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -59,23 +52,19 @@ export function getCurrentImage(city) {
 export function getHourlyTime(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
             let time = [];
             let a = time.concat(
               res.hourly.map((timestamp) =>
-                moment.unix(timestamp.dt).format("h:mm a")
+                moment.unix(timestamp.dt).format("ha")
               )
             );
             resolve(a);
@@ -87,16 +76,12 @@ export function getHourlyTime(city) {
 export function getHourlyTemp(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -113,20 +98,78 @@ export function getHourlyTemp(city) {
 export function getCurrentDescription(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=df5e6e0908d845b489d8ce684b445d98`
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-            res.results[0].geometry.lat +
-            "&lon=" +
-            res.results[0].geometry.lng +
-            "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
         )
           .then((res) => res.json())
           .then((res) => {
             resolve(res.current.weather[0].main);
+          })
+      );
+  });
+}
+
+export function getIndividualTimes(city) {
+  return new Promise((resolve, reject) => {
+    fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
+    )
+      .then((res) => res.json())
+      .then((res) =>
+        fetch(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            let dailyDays = [];
+            let array = dailyDays.concat(
+              res.hourly.map((timestamp) => {
+                return moment.unix(timestamp.dt).format("llll");
+              })
+            );
+            let dailyTemps = [];
+            let temps = dailyTemps.concat(
+              res.hourly.map((temp) => Math.floor(temp.temp))
+            );
+            let arr1, arr2, temp1, temp2, temp3;
+            let i = 0;
+            let obj1, obj2, obj3;
+
+            while (i < array.length) {
+              if (array[i].slice(0, 3) !== array[i + 1].slice(0, 3)) {
+                arr1 = array.splice(0, i + 1);
+                temp1 = temps.splice(0, i + 1);
+                break;
+              }
+              i++;
+            }
+            while (i < array.length) {
+              if (array[i].slice(0, 3) !== array[i + 1].slice(0, 3)) {
+                arr2 = array.splice(0, i + 1);
+                temp2 = temps.splice(0, i + 1);
+                break;
+              }
+              i++;
+            }
+            obj1 = {
+              date: arr1,
+              temp: temp1,
+            };
+            obj2 = {
+              date: arr2,
+              temp: temp2,
+            };
+            obj3 = {
+              date: array,
+              temp: temps,
+            };
+            let arr = [];
+            arr.push(obj1, obj2, obj3);
+            resolve(arr);
           })
       );
   });

@@ -7,11 +7,14 @@ import {
   getHourlyTemp,
   getHourlyTime,
 } from "../utils/getCurrentData";
+import { isClicked } from "../actions/itemActions";
 import { Line } from "react-chartjs-2";
 import { setLoadingStatus } from "../utils/getDailyInfo";
 import "chart.js";
 import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
+import { getIndividualTimes } from "../utils/getCurrentData";
+import moment from "moment";
 
 const override = css`
   display: block;
@@ -25,19 +28,57 @@ function CurrentForecast(props) {
   const [hourlyTime, setHourlyTime] = useState([]);
   const [hourlyTemp, setHourlyTemp] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [individualDay, setIndividualDay] = useState([]);
+  const [time, setTime] = useState([]);
 
   useEffect(() => {
     setLoadingStatus(props.item.city).then((res) => setLoading(res));
   }, []);
 
   useEffect(() => {
+    getIndividualTimes(props.item.city).then((res) => setIndividualDay(res));
+
+    let a = individualDay.filter((day) => {
+      if (props.item.data === day.date[0].slice(0, 3)) {
+        return day;
+      }
+    });
+
+    let newTime = a.map((i) => {
+      return i.date.map((j) => moment(j).format("X"));
+    });
+    let newTemp = a.map((i) => {
+      return i.temp;
+    });
+    let b = newTime.map((j) => {
+      return j.map((k) => moment.unix(k).format("ha"));
+    });
+
+    let c = [];
+    let d = [];
+    for (var i = 0; i < b.length; i++) {
+      for (var j = 0; j < b[i].length; j++) {
+        c.push(b[i][j]);
+      }
+    }
+    for (var i = 0; i < newTemp.length; i++) {
+      for (var j = 0; j < newTemp[i].length; j++) {
+        d.push(newTemp[i][j]);
+      }
+    }
+
+    setHourlyTime(c.slice(0, 5));
+    setHourlyTemp(d.slice(0, 5));
+  }, [props.item.clicked]);
+
+  useEffect(() => {
     getCurrentTemp(props.item.city).then((res) => setCurrentTemp(res));
     getCurrentImage(props.item.city).then((res) => setImage(res));
-    getHourlyTime(props.item.city).then((res) =>
-      setHourlyTime(res.slice(0, 25))
-    );
+    getHourlyTime(props.item.city).then((res) => {
+      setHourlyTime(res.slice(0, 5));
+    });
     getHourlyTemp(props.item.city).then((res) =>
-      setHourlyTemp(res.slice(0, 25))
+      setHourlyTemp(res.slice(0, 5))
     );
   }, [props.item.city]);
 
@@ -47,13 +88,45 @@ function CurrentForecast(props) {
       {
         label: "",
         fill: false,
-        lineTension: 0.5,
+        lineTension: 0,
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
         data: hourlyTemp,
       },
     ],
+  };
+
+  const lineOptions = {
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            display: true,
+          },
+          ticks: {
+            maxTicksLimit: 6,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+    legend: {
+      display: false,
+    },
+    tooltips: {
+      enabled: true,
+    },
   };
 
   return (
@@ -82,11 +155,7 @@ function CurrentForecast(props) {
           <div className="chart">
             <Line
               data={state}
-              options={{
-                legend: {
-                  display: false,
-                },
-              }}
+              options={lineOptions}
               style={{ padding: "1em" }}
             />
           </div>
@@ -103,4 +172,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(CurrentForecast);
+export default connect(mapStateToProps, { isClicked })(CurrentForecast);

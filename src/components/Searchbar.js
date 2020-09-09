@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import cities from "../cities.json";
 import { connect } from "react-redux";
@@ -8,6 +8,9 @@ import {
   getCurrentDescription,
   getCurrentTemp,
 } from "../utils/getCurrentData";
+import Sun from "../images/sun.svg";
+import Rain from "../images/rain.svg";
+import Cloud from "../images/cloud.svg";
 
 function Searchbar(props) {
   const [query, setQuery] = useState("");
@@ -15,6 +18,29 @@ function Searchbar(props) {
   const [temp, setTemp] = useState(25);
   const [image, setImage] = useState("/static/media/cloud.33a1548b.svg");
   const [desciption, setDescription] = useState("Rain");
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          setTemp(Math.floor(res.current.temp));
+          if (res.current.weather[0].main === "Rain") {
+            setImage(Rain);
+          } else if (
+            res.current.weather[0].main === "Sunny" ||
+            res.current.weather[0].main === "Clear"
+          ) {
+            setImage(Sun);
+          } else {
+            setImage(Cloud);
+          }
+          setDescription(res.current.weather[0].main);
+        });
+    });
+  }, []);
 
   const fuse = new Fuse(cities, {
     keys: ["name"],

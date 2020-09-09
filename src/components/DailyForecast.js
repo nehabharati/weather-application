@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getHourlyData } from "../actions/itemActions";
+import { getHourlyData, isClicked } from "../actions/itemActions";
 import { getDailyInfo, setLoadingStatus } from "../utils/getDailyInfo";
 import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
@@ -25,6 +25,7 @@ function DailyForecast(props) {
 
   function handleClick(item) {
     props.getHourlyData(item.day);
+    props.isClicked();
   }
 
   return (
@@ -73,4 +74,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getHourlyData })(DailyForecast);
+export default connect(mapStateToProps, { getHourlyData, isClicked })(
+  DailyForecast
+);
