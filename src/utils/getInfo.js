@@ -6,7 +6,7 @@ import Cloud from "../images/cloud.svg";
 export function getPressureInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
@@ -24,7 +24,7 @@ export function getPressureInfo(city) {
 export function getHumidityInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
@@ -42,7 +42,7 @@ export function getHumidityInfo(city) {
 export function getSunriseInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
@@ -65,7 +65,7 @@ export function getSunriseInfo(city) {
 export function getSunsetInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
@@ -87,7 +87,7 @@ export function getSunsetInfo(city) {
 export function getCurrentData(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>

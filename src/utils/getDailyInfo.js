@@ -6,7 +6,7 @@ import Cloud from "../images/cloud.svg";
 export function getDailyInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
@@ -68,7 +68,7 @@ export function getDailyInfo(city) {
 export function setLoadingStatus(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=8a4db5ed7640d2dd4ae31072e75c9b45`
     )
       .then((res) => res.json())
       .then((res) =>
