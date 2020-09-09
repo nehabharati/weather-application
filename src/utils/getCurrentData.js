@@ -2,7 +2,6 @@ import moment from "moment";
 import Sun from "../images/sun.svg";
 import Rain from "../images/rain.svg";
 import Cloud from "../images/cloud.svg";
-import { useFetch } from "../hooks/cache";
 
 export function getCurrentTemp(city) {
   return new Promise((resolve, reject) => {
