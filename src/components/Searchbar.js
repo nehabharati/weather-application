@@ -16,29 +16,35 @@ function Searchbar(props) {
   const [query, setQuery] = useState("");
   const [show, setShow] = useState(true);
   const [temp, setTemp] = useState(25);
-  const [image, setImage] = useState("/static/media/cloud.33a1548b.svg");
+  const [image, setImage] = useState("/static/media/rain.d8fdecc0.svg");
   const [desciption, setDescription] = useState("Rain");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          setTemp(Math.floor(res.current.temp));
-          if (res.current.weather[0].main === "Rain") {
-            setImage(Rain);
-          } else if (
-            res.current.weather[0].main === "Sunny" ||
-            res.current.weather[0].main === "Clear"
-          ) {
-            setImage(Sun);
-          } else {
-            setImage(Cloud);
-          }
-          setDescription(res.current.weather[0].main);
-        });
+      //   fetch(
+      //     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      //       position.coords.latitude +
+      //       "&lon=" +
+      //       position.coords.longitude +
+      //       "&units=metric&appid=4228472bfff238b3fd66bffb5801409a"
+      //   )
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       setTemp(Math.floor(res.current.temp));
+      //       if (res.current.weather[0].main === "Rain") {
+      //         setImage(Rain);
+      //       } else if (
+      //         res.current.weather[0].main === "Sunny" ||
+      //         res.current.weather[0].main === "Clear"
+      //       ) {
+      //         setImage(Sun);
+      //       } else {
+      //         setImage(Cloud);
+      //       }
+      //       setDescription(res.current.weather[0].main);
+      //     });
+      //   console.log("Latitude is :", position.coords.latitude);
+      //   console.log("Longitude is :", position.coords.longitude);
     });
   }, []);
 
@@ -64,6 +70,7 @@ function Searchbar(props) {
     getCurrentTemp(props.item.city).then((res) => setTemp(res));
     getCurrentImage(props.item.city).then((res) => {
       setImage(res);
+      console.log(res);
     });
     getCurrentDescription(props.item.city).then((res) => {
       setDescription(res);
