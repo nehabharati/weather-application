@@ -10,4 +10,4 @@ npm install
 npm start
 ```
 
-Live link: [https://todo-app-assignment.vercel.app/](https://todo-app-assignment.vercel.app/)
+Live link: [https://weather-application-one.vercel.app/](https://weather-application-one.vercel.app/)
