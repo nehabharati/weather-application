@@ -193,6 +193,14 @@ li {
   padding: 1em;
 }
 
+.sine-wave {
+  margin-left: 5em;
+}
+
+#canvas {
+  width: 100%;
+}
+
 @media (max-width: 449px) {
 
   .stats div,
@@ -203,6 +211,10 @@ li {
 
   .current-temp {
     font-size: 2rem;
+  }
+
+  .sine-wave {
+    margin-left: 5em;
   }
 }
 

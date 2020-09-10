@@ -63,7 +63,7 @@ const Canvas = React.memo((props) => {
   }
 
   return (
-    <div style={{ marginLeft: "1em" }}>
+    <div className="sine-wave">
       <canvas ref={canvas} id="canvas" width="500" height="100"></canvas>
     </div>
   );
