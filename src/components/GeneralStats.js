@@ -11,6 +11,8 @@ import "chart.js";
 import { setLoadingStatus } from "../utils/getDailyInfo";
 import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
+import Canvas from "./Canvas";
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -26,6 +28,8 @@ function GeneralStats(props) {
 
   useEffect(() => {
     setLoadingStatus(props.item.city).then((res) => setLoading(res));
+    getSunriseInfo(props.item.city).then((res) => setSunrise(res));
+    getSunsetInfo(props.item.city).then((res) => setSunset(res));
   }, []);
 
   useEffect(() => {
@@ -84,14 +88,15 @@ function GeneralStats(props) {
                 {sunset}
               </div>
             </div>
-            <Line
+            {/* <Line
               data={state}
               options={{
                 legend: {
                   display: false,
                 },
               }}
-            />
+            /> */}
+            <Canvas sunrise={sunrise} sunset={sunset} />
           </div>
         </>
       )}
