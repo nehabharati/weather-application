@@ -2,18 +2,17 @@ import moment from "moment";
 import Sun from "../images/sun.svg";
 import Rain from "../images/rain.svg";
 import Cloud from "../images/cloud.svg";
-const api = require("../apiKeys")
-const api_key = process.env.REACT_APP_API_KEY || api.api_key
+import api from "../apiKeys"
 
 export function getPressureInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api_key}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -26,12 +25,12 @@ export function getPressureInfo(city) {
 export function getHumidityInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api_key}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -44,12 +43,12 @@ export function getHumidityInfo(city) {
 export function getSunriseInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api_key}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -67,12 +66,12 @@ export function getSunriseInfo(city) {
 export function getSunsetInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api_key}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -89,12 +88,12 @@ export function getSunsetInfo(city) {
 export function getCurrentData(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api_key}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
