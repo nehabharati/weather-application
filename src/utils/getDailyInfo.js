@@ -2,16 +2,17 @@ import moment from "moment";
 import Sun from "../images/sun.svg";
 import Rain from "../images/rain.svg";
 import Cloud from "../images/cloud.svg";
+import api from "../apiKeys"
 
 export function getDailyInfo(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -68,12 +69,12 @@ export function getDailyInfo(city) {
 export function setLoadingStatus(city) {
   return new Promise((resolve, reject) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ebba0a82b1892fe9343e963816506644`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api.api_key}`
     )
       .then((res) => res.json())
       .then((res) =>
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=ebba0a82b1892fe9343e963816506644`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${res.city.coord.lat}&lon=${res.city.coord.lon}&units=metric&appid=${api.api_key}`
         )
           .then((res) => res.json())
           .then((res) => {
